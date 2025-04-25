@@ -1,0 +1,52 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio 2019/2022 settings
+.vscode/
+.vs/
+*.code-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Rider / JetBrains
+.idea/
+
+# Logs
+*.log
+
+# MongoDB local data (caso venha a usar local)
+dump/
+data/
+mongod.lock
+
+# Application settings (opcional, cuidado se usar appsettings.json com dados sensíveis)
+appsettings.Development.json
+appsettings.Local.json
+appsettings.Test.json
+secrets.json
+
+# ASP.NET environment (não afeta o seu projeto console, mas é bom deixar)
+wwwroot/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Auto-generated files
+Generated_Code/
+
+# Others
+*.db
+*.sqlite
+*.bak
