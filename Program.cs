@@ -1,25 +1,51 @@
-﻿using MongoDbCrudDemo.Models;
+﻿using MongoDbCrudDemo.Controllers;
 using MongoDbCrudDemo.Services;
 
 var mongoService = new MongoDbService();
+var userOperations = new UserOperations(mongoService);
 
-//Criar um novo usuário
-var newuser = new User
+bool running = true;
+
+while (running)
 {
-    Name = "Wilkson",
-    Email = "wilkson.cc@gmail.com",
-    Age = 42,
-    HasBiometricData = true,
-    FingerprintHash = "hash123", //Simula um has de biometria
-};
+    Console.Clear();
+    Console.WriteLine("\n==============================");
+    Console.WriteLine("       MENU PRINCIPAL");
+    Console.WriteLine("==============================");
+    Console.WriteLine("[1] Criar novo usuário");
+    Console.WriteLine("[2] Listar usuários");
+    Console.WriteLine("[3] Atualizar usuário");
+    Console.WriteLine("[4] Deletar usuário");
+    Console.WriteLine("[5] Ressetar banco de dados");
+    Console.WriteLine("[6] Sair");
+    Console.Write("Escolha uma opção: ");
 
-await mongoService.CreateUserAsync(newuser);
-Console.WriteLine("Usuário criado com sucesso!");
+    var choice = Console.ReadLine();
 
-//Ler todos os usuários
-var users = await mongoService.GetAllUsersAsync();
-Console.WriteLine("\nLista de usuários:");
-foreach (var user in users)
-{
-    Console.WriteLine($"Id: {user.Id}, Nome: {user.Name}, Email: {user.Email}, Idade: {user.Age}, Tem dados biométricos: {user.HasBiometricData}");
+    switch (choice)
+    {
+        case "1":
+            await userOperations.CreateUserAsync();
+            break;
+        case "2":
+            await userOperations.ListUsersAsync();
+            break;
+        case "3":
+            await userOperations.UpdateUserAsync();
+            break;
+        case "4":
+            await userOperations.DeleteUserAsync();
+            break;
+        case "5":
+            await userOperations.DeleteUserAsync();
+            Console.WriteLine("Banco de dados resetado com sucesso! 🔄");
+            break;
+        case "6":
+            running = false;
+            Console.WriteLine("Saindo... Até mais! 👋");
+            break;
+        default:
+            Console.WriteLine("Opção inválida! 😅 Tente novamente.");
+            break;
+    }
 }
